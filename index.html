@@ -1,0 +1,33 @@
+import numpy as np
+from numpy import pi
+import sympy as s
+import matplotlib.pyplot as plt
+
+x0 = 1
+t0 = 0
+
+#Increment
+dt = 0.01
+
+#Heat function
+def u(x,t):
+    return 80*s.exp(-0.2775*s.pi*2*t)s.sin(50.0*s.pi*x)/s.pi + 400*s.exp(-0.0999*s.pi*2*t)*s.sin(30.0*s.pi*x)/(3*s.pi) + 400*s.exp(-0.0111*s.pi*2*t)*s.sin(10.0*s.pi*x)/s.pi
+
+#Gradient of u
+def grad_u(x,t):
+    return np.array([4000.0*s.exp(-0.2775*pi*2*t)s.cos(50.0*pi*x) + 4000.0*s.exp(-0.0999*pi2*t)*s.cos(30.0*pi*x) + 4000.0*s.exp(-0.0111*pi2*t)*s.cos(10.0*pi*x),-22.2*pi*s.exp(-0.2775*pi2*t)*s.sin(50.0*pi*x) - 13.32*pi*s.exp(-0.0999*pi*2*t)*s.sin(30.0*pi*x) - 4.44*pi*s.exp(-0.0111*pi*2*t)*s.sin(10.0*pi*x)])
+
+a = []
+t = []
+
+for i in range(500):
+    value = u(x0,t0) + grad_u(x0,t0)[1]*dt
+    t.append(t0)
+    t0 = t0 + dt
+    a.append(value)
+
+plt.plot(a,t,'-')
+plt.xlabel('distance x')
+plt.ylabel('temperature')
+plt.title('u(x,t)')
+plt.show()
